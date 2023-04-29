@@ -5,6 +5,7 @@ import exercicio.java.angular.backend.documentos.model.Situacao;
 import exercicio.java.angular.backend.documentos.repository.DocumentoRepository;
 import exercicio.java.angular.backend.documentos.repository.SituacaoRepository;
 import exercicio.java.angular.backend.documentos.service.IDocumentoService;
+import exercicio.java.angular.backend.documentos.service.IHistoricoService;
 import exercicio.java.angular.backend.pastas.model.Pasta;
 import exercicio.java.angular.backend.pastas.repository.PastaRepository;
 import exercicio.java.angular.backend.setores.model.Setor;
@@ -33,6 +34,9 @@ public class DocumentoService implements IDocumentoService {
     @Autowired
     private SituacaoRepository situacaoRepository;
 
+    @Autowired
+    private IHistoricoService historicoService;
+
     @Override
     public List<Documento> listAll(Long setorId, Long pastaId, String q) {
         return repository.listAll(setorId, pastaId, q);
@@ -51,7 +55,10 @@ public class DocumentoService implements IDocumentoService {
         Situacao novo = situacaoRepository.findById(Situacao.NOVO)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "situação inválida"));
         documento.setSituacao(novo);
-        return repository.save(documento);
+
+        Documento doc = repository.save(documento); 
+        historicoService.insert(documento, novo);
+        return doc;
     }
 
     @Override
@@ -63,9 +70,9 @@ public class DocumentoService implements IDocumentoService {
         if (!existente.getPasta().equals(pasta)) {
             Situacao transferido = situacaoRepository.findById(Situacao.TRANSFERIDO)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "situação inválida"));
-            documento.setSituacao(transferido);
             existente.setSituacao(transferido);
             existente.setPasta(pasta);
+            historicoService.insert(existente, transferido);
         }
         existente.setTitulo(documento.getTitulo());
         return repository.save(existente);
