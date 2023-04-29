@@ -15,6 +15,8 @@ public class Situacao {
 
     public static final Long TRANSFERIDO = 2L;
 
+    public static final Long ENCERRADO = 3L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
