@@ -64,6 +64,8 @@ public class DocumentoService implements IDocumentoService {
             Situacao transferido = situacaoRepository.findById(Situacao.TRANSFERIDO)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "situação inválida"));
             documento.setSituacao(transferido);
+            existente.setSituacao(transferido);
+            existente.setPasta(pasta);
         }
         existente.setTitulo(documento.getTitulo());
         return repository.save(existente);
