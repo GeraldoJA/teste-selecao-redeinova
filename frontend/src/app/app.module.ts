@@ -22,6 +22,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { TransferirDialogComponent } from './shared/transferir-dialog/transferir-dialog.component';
+import { HistoricoDialogComponent } from './shared/historico-dialog/historico-dialog.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
@@ -30,6 +31,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     DocumentosComponent,
     DocumentoDialogComponent,
     TransferirDialogComponent,
+    HistoricoDialogComponent,
   ],
   imports: [
     BrowserModule,

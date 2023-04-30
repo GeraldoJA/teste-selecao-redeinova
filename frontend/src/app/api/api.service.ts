@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Axios} from "axios";
 
 import {environment} from "../../environments/environment";
-import {Documento, Pasta, Setor} from "../models";
+import {Documento, Pasta, Setor, Historico} from "../models";
 
 @Injectable()
 export class ApiService {
@@ -31,6 +31,11 @@ export class ApiService {
 
   async getPastas(setorId?: number): Promise<Array<Pasta>> {
     const result = await this.cli.get(`/setores/${setorId}/pastas`)
+    return JSON.parse(result.data);
+  }
+
+  async getHistorico(documentoId?: number): Promise<Array<Historico>> {
+    const result = await this.cli.get(`/historico/${documentoId}`)
     return JSON.parse(result.data);
   }
 

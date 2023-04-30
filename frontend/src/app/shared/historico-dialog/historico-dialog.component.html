@@ -1,0 +1,28 @@
+<h1 mat-dialog-title> Histórico </h1>
+
+<table mat-table [dataSource]="historico" *ngIf="historico && historico.length > 0" >
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> #</th>
+    <td mat-cell *matCellDef="let his"> {{his.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="mudanca">
+    <th mat-header-cell *matHeaderCellDef> Mudança</th>
+    <td mat-cell *matCellDef="let his"> {{his.mudanca}} </td>
+  </ng-container>
+  <ng-container matColumnDef="data">
+    <th mat-header-cell *matHeaderCellDef> Data</th>
+    <td mat-cell *matCellDef="let his"> {{his.data}} </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div *ngIf="!historico || historico.length == 0">
+  <p>Sem Histórico para exibir</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="dialogRef.close()">fechar</button>
+</div>
