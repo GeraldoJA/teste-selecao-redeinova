@@ -2,9 +2,11 @@ package exercicio.java.angular.backend;
 
 import exercicio.java.angular.backend.documentos.model.Documento;
 import exercicio.java.angular.backend.documentos.model.Situacao;
+import exercicio.java.angular.backend.documentos.model.Historico;
 import exercicio.java.angular.backend.documentos.repository.DocumentoRepository;
 import exercicio.java.angular.backend.documentos.repository.SituacaoRepository;
 import exercicio.java.angular.backend.documentos.service.IDocumentoService;
+import exercicio.java.angular.backend.documentos.service.IHistoricoService;
 import exercicio.java.angular.backend.pastas.model.Pasta;
 import exercicio.java.angular.backend.pastas.service.IPastaService;
 import exercicio.java.angular.backend.setores.model.Setor;
@@ -30,6 +32,9 @@ class BackendApplicationTests {
 
     @Autowired
     private IDocumentoService documentoService;
+
+    @Autowired
+    private IHistoricoService historicoService;
 
     @Autowired
     private SituacaoRepository situacaoRepository;
@@ -126,7 +131,35 @@ class BackendApplicationTests {
         Assertions.assertNotNull(result);
         Assertions.assertNotNull(result.getId());
         Assertions.assertEquals(transferido, result.getSituacao());
-
     }
+
+    @Test
+    public void deveriaCriarHistorico() {
+        Documento doc = new Documento();
+        doc.setTitulo("documento de teste");
+        doc = documentoService.insert(1L, 1L, doc);
+
+        Historico hist = new Historico();
+        hist = historicoService.insert(doc, doc.getSituacao() );
+
+        Assertions.assertNotNull(hist);
+        Assertions.assertNotNull(hist.getId());
+        Assertions.assertNotNull(hist.getData());
+        Assertions.assertNotNull(hist.getMudanca());
+        Assertions.assertNotNull(hist.getDocumento());
+    }
+
+    @Test
+    public void deveriaListarHistorico() {      
+        Documento doc = new Documento();
+        doc.setTitulo("documento de teste");
+        doc = documentoService.insert(1L, 1L, doc);
+        historicoService.insert(doc, doc.getSituacao() );
+      
+        List<Historico> result = historicoService.listaHistoricoDocumento(doc.getId());
+
+        Assertions.assertFalse(result.isEmpty());
+    }
+
 
 }
