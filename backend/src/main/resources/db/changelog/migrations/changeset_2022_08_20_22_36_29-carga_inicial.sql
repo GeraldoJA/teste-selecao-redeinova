@@ -15,8 +15,8 @@ values (1, 1, 'Prioritário'),
        (7, 3, 'Saídas');
 insert into estados_documento (id, nome)
 values (1, 'novo'),
-       (2, 'transferido'),
-       (3, 'encerrado');
+       (2, 'transferido');
+       
 
 -- rollback delete from estados_documento;
 -- rollback delete from pastas;
