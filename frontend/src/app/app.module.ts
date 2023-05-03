@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {DocumentosComponent} from './views/documentos/documentos.component';
+import {HistoricoComponent} from './views/historico/historico.component';
 
 import {ApiService} from "./api/api.service";
 
@@ -22,16 +23,15 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { TransferirDialogComponent } from './shared/transferir-dialog/transferir-dialog.component';
-import { HistoricoDialogComponent } from './shared/historico-dialog/historico-dialog.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
     AppComponent,
     DocumentosComponent,
+    HistoricoComponent,
     DocumentoDialogComponent,
     TransferirDialogComponent,
-    HistoricoDialogComponent,
   ],
   imports: [
     BrowserModule,

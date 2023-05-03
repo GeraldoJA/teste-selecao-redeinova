@@ -10,10 +10,6 @@ import {
 import {
   TransferirDialogComponent
 } from "../../shared/transferir-dialog/transferir-dialog.component";
-import {
-  HistoricoDialogComponent
-} from "../../shared/historico-dialog/historico-dialog.component";
-
 
 @Component({
   selector: 'app-documentos',
@@ -69,15 +65,6 @@ export class DocumentosComponent implements OnInit {
         await this.api.salvarDocumento(<number>setor.id, <number>pasta.id, documento);
         this.listar();
       }
-    });    
-  }
-
-  async historico(doc: Documento)  {
-    let listaHistorico = await this.api.getHistorico(doc.id);
-    
-    this.dialog.open(HistoricoDialogComponent, {
-      data: ({...listaHistorico}),
-      width: "50%"
     });    
   }
 
