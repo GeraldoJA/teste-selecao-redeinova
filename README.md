@@ -1,6 +1,7 @@
 # exercício java/spring angular
 
-pequena prova de conceito de um frontend angular consumindo um backend java
+* pequena prova de conceito de um frontend angular consumindo um backend java
+* link original: https://github.com/sombriks/exercicio-spring-angular
 
 ## requisitos
 
